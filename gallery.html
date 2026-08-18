@@ -34,160 +34,121 @@
 }
 </script>
 <style>
-@property --angle{
-  syntax:"<angle>";
-  initial-value:0deg;
-  inherits:false;
-}
-@keyframes spin-angle{to{--angle:360deg}}
-
-/* ---------- Uniform grid ---------- */
+/* ---------- Gallery layout ---------- */
 .gallery .gal-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:24px;
+  grid-template-columns:repeat(6,1fr);
+  grid-auto-rows:110px;
+  gap:14px;
   margin-top:10px;
 }
-.tile{
-  --angle:0deg;
+.gal-tile{
   position:relative;
-  aspect-ratio:4/3;
-  border-radius:22px;
-  padding:5px;
-  background:conic-gradient(from var(--angle),
-    #1f4a47 0 12%, #e07856 28% 42%, #1f4a47 58% 70%, #e07856 86% 96%, #1f4a47 100%);
-  animation:spin-angle 9s linear infinite;
-  cursor:pointer;
   overflow:hidden;
+  border-radius:18px;
+  cursor:pointer;
+  background:#e9efe9;
+  grid-row:span 4;
   opacity:0;
-  transform:translateY(26px) scale(.97);
+  transform:translateY(28px) scale(.98);
 }
-.tile.in{
-  opacity:1;transform:none;
-  transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);
+.gal-tile.in{
+  opacity:1;
+  transform:none;
+  transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1);
 }
-.tile:hover{animation-duration:1.4s}
-.tile img{
-  position:absolute;inset:5px;
-  width:calc(100% - 10px);height:calc(100% - 10px);
-  object-fit:cover;border-radius:17px;display:block;
-  transition:transform 1.1s cubic-bezier(.22,1,.36,1),filter .5s ease;
+.gal-tile:nth-child(1){grid-column:span 4;grid-row:span 5}
+.gal-tile:nth-child(2){grid-column:span 2;grid-row:span 5}
+.gal-tile:nth-child(3){grid-column:span 2;grid-row:span 4}
+.gal-tile:nth-child(4){grid-column:span 2;grid-row:span 4}
+.gal-tile:nth-child(5){grid-column:span 2;grid-row:span 4}
+.gal-tile:nth-child(6){grid-column:span 3;grid-row:span 4}
+.gal-tile:nth-child(7){grid-column:span 3;grid-row:span 4}
+.gal-tile img{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+  transform:scale(1.02);
+  transition:transform 1.4s cubic-bezier(.22,1,.36,1),filter .6s ease;
+  animation:breathe 14s ease-in-out infinite alternate;
 }
-.tile:hover img{transform:scale(1.06);filter:brightness(.85)}
-.tile .cap{
-  position:absolute;inset:auto 10px 10px 10px;
-  padding:34px 14px 12px;
-  border-radius:0 0 13px 13px;
-  background:linear-gradient(to top,rgba(10,32,30,.78),transparent);
+@keyframes breathe{
+  from{transform:scale(1.02)}
+  to{transform:scale(1.09)}
+}
+.gal-tile:hover img{filter:brightness(.82) saturate(1.05)}
+.gal-tile .cap{
+  position:absolute;inset:auto 0 0 0;
+  padding:40px 20px 16px;
+  background:linear-gradient(to top,rgba(10,32,30,.72),transparent);
   color:#fff;
-  opacity:0;transform:translateY(12px);
-  transition:opacity .45s ease,transform .45s cubic-bezier(.22,1,.36,1);
+  opacity:0;
+  transform:translateY(14px);
+  transition:opacity .5s ease,transform .5s cubic-bezier(.22,1,.36,1);
   pointer-events:none;
 }
-.tile:hover .cap{opacity:1;transform:none}
-.tile .cap h4{
+.gal-tile:hover .cap{opacity:1;transform:none}
+.gal-tile .cap h4{
   font-family:'Cormorant Garamond',serif;
-  font-size:1.25rem;font-weight:600;margin:0;
+  font-size:1.35rem;font-weight:600;margin:0;
+  letter-spacing:.02em;
 }
-.tile .cap span{
+.gal-tile .cap span{
   font-family:'Jost',sans-serif;
-  font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
   opacity:.85;
 }
 .gal-badge{
-  position:absolute;top:16px;left:16px;z-index:3;
+  position:absolute;top:14px;left:14px;
   display:inline-flex;align-items:center;gap:7px;
   padding:7px 13px;border-radius:999px;
-  background:rgba(255,255,255,.92);
+  background:rgba(255,255,255,.9);
   color:#1f4a47;
   font-family:'Jost',sans-serif;font-size:.68rem;
   letter-spacing:.18em;text-transform:uppercase;font-weight:500;
   backdrop-filter:blur(6px);
-  opacity:0;transform:translateY(-6px);
-  transition:opacity .45s ease .06s,transform .45s cubic-bezier(.22,1,.36,1) .06s;
+  transform:translateY(-6px);opacity:0;
+  transition:opacity .5s ease .08s,transform .5s cubic-bezier(.22,1,.36,1) .08s;
 }
-.tile:hover .gal-badge{opacity:1;transform:none}
+.gal-tile:hover .gal-badge{opacity:1;transform:none}
 .gal-badge svg{width:10px;height:10px;fill:#e07856}
-.gal-play{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;
-  width:56px;height:56px;border-radius:50%;
-  background:rgba(255,255,255,.92);
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 10px 28px rgba(0,0,0,.3);
-  transition:transform .45s cubic-bezier(.22,1,.36,1),background .3s ease;
-}
-.gal-play svg{width:20px;height:20px;fill:#e07856;margin-left:3px}
-.tile:hover .gal-play{transform:translate(-50%,-50%) scale(1.12)}
-
-/* ---------- Meditation banner ---------- */
-.banner{
-  position:relative;
-  min-height:400px;
-  display:flex;align-items:center;justify-content:center;
-  text-align:center;color:#fff;
-  background:url('https://static.wixstatic.com/media/dc56da_44e17e731c0343488116222edfd1cdccf000.jpg') 50% 30%/cover no-repeat;
-  overflow:hidden;
-  animation:kb 16s ease-in-out infinite alternate;
-}
-@keyframes kb{from{background-position:50% 25%}to{background-position:50% 75%}}
-.banner::before{
-  content:"";position:absolute;inset:0;
-  background:rgba(10,32,30,.58);
-}
-.banner-inner{position:relative;z-index:1;max-width:760px;padding:70px 24px}
-.banner-inner h2{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(1.9rem,4vw,3rem);font-weight:600;margin:12px 0;
-  letter-spacing:.01em;
-}
-.banner-inner p{font-family:'Jost',sans-serif;font-weight:300;color:rgba(255,255,255,.85);margin:0}
 
 /* ---------- Videos ---------- */
 .videos .vid-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:24px;
+  gap:22px;
   margin-top:10px;
 }
 .vid{
-  overflow:hidden;border-radius:22px;
+  border-radius:18px;overflow:hidden;
   background:#fff;
   box-shadow:0 18px 40px -18px rgba(31,74,71,.35);
-  opacity:0;transform:translateY(26px);
+  opacity:0;transform:translateY(28px);
 }
-.vid.in{opacity:1;transform:none;transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1),box-shadow .4s ease}
+.vid.in{opacity:1;transform:none;transition:opacity .9s cubic-bezier(.22,1,.36,1),transform .9s cubic-bezier(.22,1,.36,1),box-shadow .4s ease}
 .vid:hover{box-shadow:0 26px 55px -18px rgba(31,74,71,.5)}
-.vid-frame{
-  --angle:0deg;
-  position:relative;aspect-ratio:16/9;
-  background:conic-gradient(from var(--angle),
-    #1f4a47 0 12%, #e07856 28% 42%, #1f4a47 58% 70%, #e07856 86% 96%, #1f4a47 100%);
-  animation:spin-angle 9s linear infinite;
-  cursor:pointer;
-}
-.vid:hover .vid-frame{animation-duration:1.4s}
-.vid-frame video{
-  position:absolute;inset:5px;
-  width:calc(100% - 10px);height:calc(100% - 10px);
-  object-fit:cover;border-radius:15px;background:#0d211f;
-}
+.vid-frame{position:relative;aspect-ratio:16/9;cursor:pointer;background:#0d211f}
+.vid-frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .vid-play{
   position:absolute;inset:0;margin:auto;
-  width:60px;height:60px;border-radius:50%;
+  width:64px;height:64px;border-radius:50%;
   background:rgba(255,255,255,.92);
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 10px 30px rgba(0,0,0,.3);
-  transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .35s ease;
+  transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .35s ease,background .3s ease;
 }
-.vid-play svg{width:20px;height:20px;fill:#e07856;margin-left:4px}
+.vid-play svg{width:22px;height:22px;fill:#e07856;margin-left:4px}
 .vid:hover .vid-play{transform:scale(1.12)}
 .vid.playing .vid-play{opacity:0;pointer-events:none;transform:scale(1.5)}
 .vid-play::before{
   content:"";position:absolute;inset:-8px;border-radius:50%;
-  border:2px solid rgba(255,255,255,.6);
+  border:2px solid rgba(255,255,255,.55);
   animation:pulse 2.2s ease-out infinite;
 }
-@keyframes pulse{0%{transform:scale(.85);opacity:.9}100%{transform:scale(1.5);opacity:0}}
+@keyframes pulse{
+  0%{transform:scale(.85);opacity:.9}
+  100%{transform:scale(1.5);opacity:0}
+}
 .vid .cap{padding:18px 20px 20px}
 .vid .cap h4{
   font-family:'Cormorant Garamond',serif;
@@ -218,7 +179,8 @@
   max-width:92vw;max-height:78vh;
   border-radius:14px;
   box-shadow:0 30px 80px rgba(0,0,0,.6);
-  display:none;object-fit:contain;
+  display:none;
+  object-fit:contain;
 }
 #lbVideo{
   width:min(1100px,92vw);aspect-ratio:16/9;
@@ -256,17 +218,16 @@
 
 /* ---------- Responsive ---------- */
 @media(max-width:900px){
-  .gallery .gal-grid,.videos .vid-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:560px){
-  .gallery .gal-grid,.videos .vid-grid{grid-template-columns:1fr}
-  .banner{min-height:300px}
+  .gallery .gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:200px}
+  .gal-tile:nth-child(n){grid-column:span 1;grid-row:span 1}
+  .gal-tile:nth-child(1){grid-column:span 2;grid-row:span 1}
+  .videos .vid-grid{grid-template-columns:1fr}
   .lb-btn{width:44px;height:44px}
   #lbPrev{left:8px}
   #lbNext{right:8px}
 }
 @media(prefers-reduced-motion:reduce){
-  .tile,.vid-frame,.banner{animation:none}
+  .gal-tile img{animation:none}
   .vid-play::before{animation:none}
 }
 </style>
@@ -313,44 +274,45 @@
 <h2>Moments by the Sea</h2>
 </div>
 <div class="gal-grid" id="galGrid">
-<figure class="tile" data-type="image" data-full="https://static.wixstatic.com/media/dc56da_1c18ec950dbb405986bc2ff25bfb9624~mv2.jpg">
+<!-- tile 1 : hero image -->
+<figure class="gal-tile" data-type="image" data-full="https://static.wixstatic.com/media/dc56da_1c18ec950dbb405986bc2ff25bfb9624~mv2.jpg">
 <img alt="Oceanfront yoga practice at Polem Beach" loading="lazy" src="https://static.wixstatic.com/media/dc56da_1c18ec950dbb405986bc2ff25bfb9624~mv2.jpg"/>
 <figcaption class="cap"><span>Oceanfront</span><h4>Where practice meets the horizon</h4></figcaption>
 </figure>
-<figure class="tile" data-type="video" data-full="https://video.wixstatic.com/video/dc56da_cd88acb128e6461a8ac1d78fc8e97cb5/720p/mp4/file.mp4">
-<img alt="Play — Polem Beach Yoga, Oceanfront Sanctuary" loading="lazy" src="https://static.wixstatic.com/media/dc56da_cd88acb128e6461a8ac1d78fc8e97cb5f000.jpg"/>
-<div class="gal-badge"><svg viewbox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Video</div>
-<div class="gal-play"><svg viewbox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-<figcaption class="cap"><span>Watch</span><h4>Oceanfront Sanctuary</h4></figcaption>
-</figure>
-<figure class="tile" data-type="image" data-full="https://static.wixstatic.com/media/dc56da_cd88acb128e6461a8ac1d78fc8e97cb5f000.jpg">
+<!-- tile 2 : shala -->
+<figure class="gal-tile" data-type="image" data-full="https://static.wixstatic.com/media/dc56da_cd88acb128e6461a8ac1d78fc8e97cb5f000.jpg">
 <img alt="A day at the Polem Beach shala" loading="lazy" src="https://static.wixstatic.com/media/dc56da_cd88acb128e6461a8ac1d78fc8e97cb5f000.jpg"/>
 <figcaption class="cap"><span>The Shala</span><h4>A day of breath and movement</h4></figcaption>
 </figure>
-<figure class="tile" data-type="video" data-full="https://video.wixstatic.com/video/dc56da_2d62ab2625dd46c8acafe2eb179243f4/720p/mp4/file.mp4">
-<img alt="Play — Goa Yoga Retreat, A Day at the Shala" loading="lazy" src="https://static.wixstatic.com/media/dc56da_2d62ab2625dd46c8acafe2eb179243f4f000.jpg"/>
-<div class="gal-badge"><svg viewbox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Video</div>
-<div class="gal-play"><svg viewbox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-<figcaption class="cap"><span>Watch</span><h4>A Day at the Shala</h4></figcaption>
-</figure>
-<figure class="tile" data-type="image" data-full="https://static.wixstatic.com/media/dc56da_2d62ab2625dd46c8acafe2eb179243f4f000.jpg">
+<!-- tile 3 : venue -->
+<figure class="gal-tile" data-type="image" data-full="https://static.wixstatic.com/media/dc56da_2d62ab2625dd46c8acafe2eb179243f4f000.jpg">
 <img alt="The oceanfront venue surrounded by palm trees" loading="lazy" src="https://static.wixstatic.com/media/dc56da_2d62ab2625dd46c8acafe2eb179243f4f000.jpg"/>
 <figcaption class="cap"><span>The Venue</span><h4>Your retreat, by the water</h4></figcaption>
 </figure>
-<figure class="tile" data-type="video" data-full="https://video.wixstatic.com/video/dc56da_44e17e731c0343488116222edfd1cdcc/720p/mp4/file.mp4">
+<!-- tile 4 : seaside meditation -->
+<figure class="gal-tile" data-type="image" data-full="https://static.wixstatic.com/media/dc56da_44e17e731c0343488116222edfd1cdccf000.jpg">
+<img alt="Sunrise meditation on the beach" loading="lazy" src="https://static.wixstatic.com/media/dc56da_44e17e731c0343488116222edfd1cdccf000.jpg"/>
+<figcaption class="cap"><span>Meditation</span><h4>Stillness before the sun rises</h4></figcaption>
+</figure>
+<!-- tile 5 : video -->
+<figure class="gal-tile" data-type="video" data-full="https://video.wixstatic.com/video/dc56da_cd88acb128e6461a8ac1d78fc8e97cb5/720p/mp4/file.mp4">
+<img alt="Play — Polem Beach Yoga, Oceanfront Sanctuary" loading="lazy" src="https://static.wixstatic.com/media/dc56da_cd88acb128e6461a8ac1d78fc8e97cb5f000.jpg"/>
+<div class="gal-badge"><svg viewbox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Video</div>
+<figcaption class="cap"><span>Watch</span><h4>Oceanfront Sanctuary</h4></figcaption>
+</figure>
+<!-- tile 6 : video -->
+<figure class="gal-tile" data-type="video" data-full="https://video.wixstatic.com/video/dc56da_2d62ab2625dd46c8acafe2eb179243f4/720p/mp4/file.mp4">
+<img alt="Play — Goa Yoga Retreat, A Day at the Shala" loading="lazy" src="https://static.wixstatic.com/media/dc56da_2d62ab2625dd46c8acafe2eb179243f4f000.jpg"/>
+<div class="gal-badge"><svg viewbox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Video</div>
+<figcaption class="cap"><span>Watch</span><h4>A Day at the Shala</h4></figcaption>
+</figure>
+<!-- tile 7 : video -->
+<figure class="gal-tile" data-type="video" data-full="https://video.wixstatic.com/video/dc56da_44e17e731c0343488116222edfd1cdcc/720p/mp4/file.mp4">
 <img alt="Play — Host Your Own Retreat, The Venue" loading="lazy" src="https://static.wixstatic.com/media/dc56da_44e17e731c0343488116222edfd1cdccf000.jpg"/>
 <div class="gal-badge"><svg viewbox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>Video</div>
-<div class="gal-play"><svg viewbox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
 <figcaption class="cap"><span>Watch</span><h4>The Venue</h4></figcaption>
 </figure>
 </div>
-</div>
-</section>
-<section class="banner">
-<div class="banner-inner">
-<div class="eyebrow" style="color:#e7c39b">Meditation</div>
-<h2>Stillness before the sun rises</h2>
-<p>Seaside meditation at dawn — watching the horizon, breathing with the tide, and letting the day begin gently.</p>
 </div>
 </section>
 <section class="videos section" style="background:var(--sand)">
@@ -435,14 +397,14 @@
 <script>
 (function(){
 "use strict";
-/* ---------- Scroll-in reveal ---------- */
-var revealables=document.querySelectorAll(".tile,.vid");
+/* ---------- Scroll-in reveal (gallery + videos) ---------- */
+var revealables=document.querySelectorAll(".gal-tile,.vid");
 if("IntersectionObserver" in window){
   var io=new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){
         var el=e.target,sib=el.parentElement?Array.prototype.indexOf.call(el.parentElement.children,el):0;
-        el.style.transitionDelay=(Math.max(sib,0)%3)*100+"ms";
+        el.style.transitionDelay=(Math.max(sib,0)%4)*90+"ms";
         el.classList.add("in");
         io.unobserve(el);
       }
@@ -481,7 +443,7 @@ var lb=document.getElementById("lightbox"),
     lbVideo=document.getElementById("lbVideo"),
     lbCap=document.getElementById("lbCap"),
     lbCount=document.getElementById("lbCount"),
-    tiles=Array.prototype.slice.call(document.querySelectorAll(".tile")),
+    tiles=Array.prototype.slice.call(document.querySelectorAll(".gal-tile")),
     idx=0;
 function show(i){
   idx=(i+tiles.length)%tiles.length;
