@@ -279,7 +279,7 @@
     "https://raw.githubusercontent.com/hunterrsec/Photos_Atul/main/yoga/19.jpg",
     "https://raw.githubusercontent.com/hunterrsec/Photos_Atul/main/yoga/20.jpg",
     "https://raw.githubusercontent.com/hunterrsec/Photos_Atul/refs/heads/main/yoga/23.png",
-    "https://raw.githubusercontent.com/hunterrsec/Photos_Atul/refs/heads/main/yoga/20.jpg",
+    "https://static.wixstatic.com/media/dc56da_1c18ec950dbb405986bc2ff25bfb9624~mv2.jpg",
     "https://raw.githubusercontent.com/hunterrsec/Photos_Atul/refs/heads/main/yoga/7.jpg"
   ];
 
