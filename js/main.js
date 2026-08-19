@@ -278,9 +278,9 @@
     "https://raw.githubusercontent.com/hunterrsec/Photos_Atul/main/yoga/18.jpg",
     "https://raw.githubusercontent.com/hunterrsec/Photos_Atul/main/yoga/19.jpg",
     "https://raw.githubusercontent.com/hunterrsec/Photos_Atul/main/yoga/20.jpg",
-    "https://static.wixstatic.com/media/dc56da_5ce12eb422c047629938edb029d8ef4e~mv2.png",
-    "https://static.wixstatic.com/media/dc56da_1173109135734f96b6ea9f65e914a55c~mv2.jpg",
-    "https://static.wixstatic.com/media/dc56da_852bc357ce3c459a8504042509d58f14~mv2.jpg"
+    "https://raw.githubusercontent.com/hunterrsec/Photos_Atul/refs/heads/main/yoga/23.png",
+    "https://raw.githubusercontent.com/hunterrsec/Photos_Atul/refs/heads/main/yoga/20.jpg",
+    "https://raw.githubusercontent.com/hunterrsec/Photos_Atul/refs/heads/main/yoga/7.jpg"
   ];
 
 
