@@ -57,7 +57,7 @@
     'https://static.wixstatic.com/media/dc56da_a0e9f2253c4c41b7bdd49b0b26c02bcb~mv2.jpg',
     'https://static.wixstatic.com/media/dc56da_ceefa96e2bb34b6ebc539b067aef9732~mv2.jpg',
     'https://static.wixstatic.com/media/dc56da_8a51b26190e54a78a0e6791519433b6b~mv2.jpg',
-    'https://static.wixstatic.com/media/dc56da_b3482b60497642dc8b58fc91e205901e~mv2.jpg',
+    'https://raw.githubusercontent.com/hunterrsec/Photos_Atul/refs/heads/main/yoga/New16.png',
     'https://static.wixstatic.com/media/dc56da_eef099334e604b1e95a0c41bb0d5a9f7~mv2.jpg',
     'https://static.wixstatic.com/media/dc56da_95bdf7270cbc4515bc2813ab178d6310~mv2.jpg',
     'https://static.wixstatic.com/media/dc56da_20b686c145fd458fa22a628397a3f363~mv2.jpg',
