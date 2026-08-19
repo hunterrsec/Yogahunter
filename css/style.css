@@ -297,3 +297,193 @@ footer .f-line a{color:#f0c98a;}
   .pay-block{padding:32px 22px;}
   .contact .cta-box{padding:30px 22px;}
 }
+
+/* =========================================
+   POLEM BEACH YOGA GALLERY
+========================================= */
+
+#galGrid,
+.gallery-grid-extra,
+#retreatGrid,
+#ttcGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+  align-items: stretch;
+}
+
+
+/* Gallery card */
+
+#galGrid .gal-item,
+.gallery-grid-extra .gal-item,
+#retreatGrid .gal-item,
+#ttcGrid .gal-item {
+  position: relative;
+  width: 100%;
+  min-height: 280px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #eee;
+}
+
+
+/* Normal image */
+
+#galGrid .gal-item img,
+.gallery-grid-extra .gal-item img,
+#retreatGrid .gal-item img,
+#ttcGrid .gal-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  object-fit: cover;
+  object-position: center center;
+  cursor: pointer;
+  transition:
+    transform 0.6s ease,
+    filter 0.6s ease;
+}
+
+
+/* Larger gallery images */
+
+#galGrid .gal-large {
+  grid-row: span 2;
+  min-height: 576px;
+}
+
+#galGrid .gal-large img {
+  min-height: 576px;
+}
+
+
+/* Hover */
+
+#galGrid .gal-item:hover img,
+.gallery-grid-extra .gal-item:hover img,
+#retreatGrid .gal-item:hover img,
+#ttcGrid .gal-item:hover img {
+  transform: scale(1.04);
+  filter: brightness(0.96);
+}
+
+
+/* =========================================
+   LIGHTBOX
+========================================= */
+
+body.lightbox-open {
+  overflow: hidden;
+}
+
+#lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.92);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+#lightbox.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+#lbImg {
+  display: block;
+  max-width: 95vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 900px) {
+
+  #galGrid,
+  .gallery-grid-extra,
+  #retreatGrid,
+  #ttcGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  #galGrid .gal-item,
+  .gallery-grid-extra .gal-item,
+  #retreatGrid .gal-item,
+  #ttcGrid .gal-item {
+    min-height: 240px;
+  }
+
+  #galGrid .gal-large {
+    min-height: 492px;
+  }
+
+  #galGrid .gal-large img {
+    min-height: 492px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  #galGrid,
+  .gallery-grid-extra,
+  #retreatGrid,
+  #ttcGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  #galGrid .gal-item,
+  .gallery-grid-extra .gal-item,
+  #retreatGrid .gal-item,
+  #ttcGrid .gal-item {
+    min-height: 180px;
+    border-radius: 12px;
+  }
+
+  #galGrid .gal-item img,
+  .gallery-grid-extra .gal-item img,
+  #retreatGrid .gal-item img,
+  #ttcGrid .gal-item img {
+    min-height: 180px;
+  }
+
+  #galGrid .gal-large {
+    min-height: 368px;
+  }
+
+  #galGrid .gal-large img {
+    min-height: 368px;
+  }
+
+  #lightbox {
+    padding: 12px;
+  }
+
+  #lbImg {
+    max-width: 98vw;
+    max-height: 88vh;
+  }
+}
